@@ -55,5 +55,5 @@ if __name__ == "__main__":
             # print("PID: {} has shut down.".format(i_pid))
 
         end = time.time()
-        print(end - start)
+        print("Elapsed time = {}s.".format(end - start))
 

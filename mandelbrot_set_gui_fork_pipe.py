@@ -74,5 +74,5 @@ if __name__ == "__main__":
             os.waitpid(i_pid, 0)
 
         end = time.time()
-        print(end - start)
+        print("Elapsed time = {}s.".format(end - start))
         image.save(str(width) + "_" + str(height) + "_" + str(max_iter) + "_" + str(fork_number) + "_process.png")
