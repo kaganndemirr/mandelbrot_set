@@ -15,15 +15,15 @@ if __name__ == "__main__":
 
     start = time.time()
 
-    width, height = 160, 160
+    width, height = 128, 128
     x1 = -2.0
     x2 = 2.0
     y1 = -2.0
     y2 = 2.0
 
-    max_iter = 1000
+    max_iter = 1_000_000
 
-    fork_number = 2
+    fork_number = 64
 
     shutdown_list = []
     p_id = 0

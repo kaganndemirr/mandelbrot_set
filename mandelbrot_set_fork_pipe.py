@@ -1,8 +1,6 @@
 import os
 import time
 
-from PIL import Image
-
 def escape_time_algorithm(c, m):
     z = complex(0, 0)
     for i in range(m):
@@ -49,7 +47,6 @@ if __name__ == "__main__":
                     zy = y * (y2 - y1) / height + y1
                     color = escape_time_algorithm(complex(zx, zy), max_iter)
                     information += str(x) + " " + str(y) + " " + str(color) + "\n"
-                    # information += str(color) + "\n"
 
             if os.write(pipe_list[process_number][1], bytes(information, encoding)) < 0:
                 print("Writing color failed!")
@@ -61,18 +58,13 @@ if __name__ == "__main__":
             shutdown_list.append(p_id)
 
     if p_id > 0:
-        image = Image.new("RGB", size=(width, height))
 
         for process_number in range(fork_number):
             information = os.read(pipe_list[process_number][0], 9_999_999_999)
-
-            for splitted_information in information[:-1].decode().split("\n"):
-                image.putpixel((int(splitted_information.split(" ")[0]), int(splitted_information.split(" ")[1])), (int(splitted_information.split(" ")[2]) % 4 * 64, int(splitted_information.split(" ")[2]) % 8 * 32, int(splitted_information.split(" ")[2]) % 16 * 16))
 
 
         for i_pid in shutdown_list:
             os.waitpid(i_pid, 0)
 
         end = time.time()
-        print(end - start)
-        image.save(str(width) + "_" + str(height) + "_" + str(max_iter) + "_" + str(fork_number) + "_process.png")
+        print("Elapsed time = {}s.".format(end - start))
