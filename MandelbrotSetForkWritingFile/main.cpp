@@ -3,11 +3,12 @@
 #include <iostream>
 #include <complex>
 #include <chrono>
+#include <fstream>
 
-#define FORK_NUMBER 64
+#define FORK_NUMBER 128
 
 auto escapeTimeAlgorithm(std::complex<double> c) {
-    int maxIter = 1000000;
+    int maxIter = 1000;
     std::complex<double> z(0, 0);
     for(int i = 0; i < maxIter; i++){
         z = pow(z, 2) + c;
@@ -22,12 +23,14 @@ int main()
 {
     std::chrono::steady_clock::time_point begin = std::chrono::steady_clock::now();
 
-    int width = 128;
-    int height = 128;
+    int width = 1280;
+    int height = 720;
     int x1 = -2.0;
     int x2 = 2.0;
     int y1 = -2.0;
     int y2 = 2.0;
+
+    std::ofstream pixelFile("x, y, color.txt");
 
     pid_t shutDownArray[FORK_NUMBER];
     int pID;
@@ -46,7 +49,7 @@ int main()
                 for(int y = 0; y < height; y++){
                     auto zy = y * (y2 - y1) / height + y1;
                     auto color = escapeTimeAlgorithm(std::complex(static_cast<double>(zx), static_cast<double>(zy)));
-                    information += std::to_string(x) + " " + std::to_string(y) + " " + std::to_string(color) + "\n";
+                    pixelFile << std::to_string(x) + " " + std::to_string(y) + " " + std::to_string(color) + "\n";
                 }
             }
 
@@ -59,6 +62,8 @@ int main()
     }
 
     if (pID > 0){
+
+        pixelFile.close();
 
         for(auto & i : shutDownArray){
             waitpid(i, nullptr, 0);

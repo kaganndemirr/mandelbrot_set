@@ -23,7 +23,7 @@ if __name__ == "__main__":
 
     max_iter = 1_000_000
 
-    fork_number = 64
+    fork_number = 2
 
     shutdown_list = []
     p_id = 0
