@@ -26,9 +26,9 @@ if __name__ == "__main__":
 
     pixel_file = open("x, y, color.txt", "w")
 
-    max_iter = 1_000
+    max_iter = 10_000
 
-    fork_number = 128
+    fork_number = 64
 
     shutdown_list = []
     p_id = 0

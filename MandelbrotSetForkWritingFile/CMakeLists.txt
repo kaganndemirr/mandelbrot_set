@@ -4,3 +4,4 @@ project(MandelbrotSet)
 set(CMAKE_CXX_STANDARD 23)
 
 add_executable(MandelbrotSet main.cpp)
+set(CMAKE_CXX_FLAGS_RELEASE "-O3")
