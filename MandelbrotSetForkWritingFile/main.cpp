@@ -2,14 +2,13 @@
 #include <sys/wait.h>
 #include <iostream>
 #include <complex>
-#include <chrono>
 #include <fstream>
 
-#define FORK_NUMBER 2
+#define FORK_NUMBER 128
 
 auto escapeTimeAlgorithm(std::complex<double> c) {
     std::complex<double> z(0, 0);
-    for(int i = 0; i < 100; i++){
+    for(int i = 0; i < 10000; i++){
         z = std::pow(z, 2) + c;
         if (std::abs(z) > 2){
             return i;
@@ -20,7 +19,6 @@ auto escapeTimeAlgorithm(std::complex<double> c) {
 
 int main()
 {
-    std::chrono::steady_clock::time_point begin = std::chrono::steady_clock::now();
 
     int width = 1280;
     int height = 1280;
@@ -67,9 +65,6 @@ int main()
         }
 
         pixelFile.close();
-
-        std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
-        std::cout << "Elapsed Time = " << std::chrono::duration_cast<std::chrono::seconds>(end - begin).count() << "s.\n";
 
     }
 

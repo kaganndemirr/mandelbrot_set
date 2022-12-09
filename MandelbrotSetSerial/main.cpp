@@ -17,12 +17,11 @@ auto escapeTimeAlgorithm(std::complex<double> c) {
 
 int main()
 {
-	std::chrono::steady_clock::time_point begin = std::chrono::steady_clock::now();
 
 	std::ofstream pixelFile("x, y, color.txt");
 
     int width = 1280;
-    int height = 720;
+    int height = 1280;
     double x1 = -2.0;
     double x2 = 2.0;
     double y1 = -2.0;
@@ -38,9 +37,6 @@ int main()
     }
 
     pixelFile.close();
-
-    std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
-    std::cout << "Elapsed Time = " << std::chrono::duration_cast<std::chrono::seconds>(end - begin).count() << "s.\n";
 
     return 0;
 
